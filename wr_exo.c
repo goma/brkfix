@@ -482,11 +482,13 @@ wr_resetup_exo(Exo_DB *exo,
 				exo->num_elem_vars,
 				exo->elem_var_names);
       EH(status, "ex_put_var_names(e)");
-      status = ex_put_elem_var_tab(exo->exoid, 
-				   exo->num_elem_blocks,
-				   exo->num_elem_vars, 
-				   exo->elem_var_tab);
-      EH(status, "ex_put_elem_var_tab");
+      if (exo->elem_var_tab != NULL) {
+        status = ex_put_elem_var_tab(exo->exoid, 
+                                     exo->num_elem_blocks,
+                                     exo->num_elem_vars, 
+                                     exo->elem_var_tab);
+        EH(status, "ex_put_elem_var_tab");
+      }
     }
 
   if ( exo->num_node_vars > 0 )
@@ -592,7 +594,7 @@ wr_result_exo(Exo_DB *exo,
 		{
 		  index = j * exo->num_elem_vars + k;
 		  
-		  if ( exo->elem_var_tab[index] != 0 )
+		  if ( exo->elem_var_tab == NULL || exo->elem_var_tab[index] != 0 )
 		    {
 		      status = ex_put_elem_var(exo->exoid, time_index, k+1,
 					       exo->eb_id[j], 

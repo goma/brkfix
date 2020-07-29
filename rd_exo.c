@@ -2353,7 +2353,7 @@ free_exo_ev(Exo_DB *x)
 	      for ( k=0; k<x->num_elem_vars; k++)
 		{
 		  index = j * x->num_elem_vars + k;
-		  if ( x->elem_var_tab[index] != 0 )
+		  if ( x->elem_var_tab == NULL || x->elem_var_tab[index] != 0 )
 		    {
 		      safe_free(x->ev[i][index]);
 		    }
@@ -2511,7 +2511,7 @@ alloc_exo_ev(Exo_DB *x,
 	  for ( k=0; k<x->num_elem_vars; k++)
 	    {
 	      index = j * x->num_elem_vars + k;
-	      if ( x->elem_var_tab[index] != 0 )
+	      if ( x->elem_var_tab == NULL || x->elem_var_tab[index] != 0 )
 		{
 		  x->ev[i][index] = (dbl *) smalloc(x->eb_num_elems[j]*
 						    sizeof(dbl));
