@@ -4,3 +4,5 @@ brk
 fix
 .project
 .cproject
+/build*/
+/.cache/

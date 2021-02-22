@@ -106,10 +106,12 @@ PROTO((Exo_DB *,		/* exo - ptr to full ripe EXODUS II fe db */
        char *,			/* filename - where to write */
        int ));			/* verbosity - 0 for quiet, more to talk */
 
-extern void wr_result_exo	/* wr_exo.c */
-PROTO((Exo_DB *,		/* exo */
-       char *,			/* filename - where to write */
-       int ));			/* verbosity - 0 for quiet, more to talk */
+void 
+wr_result_exo(Exo_DB *exo,
+	      char *filename,
+	      int verbosity,
+              int write_node_vars,
+              int write_elem_vars);
 
 extern void zero_base		/* utils.c */
 PROTO((Exo_DB *));		/* E - pointer to an EXODUS II database */
@@ -752,7 +754,7 @@ main (int argc, char *argv[], char *envp[])
 	      "About to wr_results at t=%d, mono->nv_time_indeces[0]=%d\n", 
 	      t, mono->nv_time_indeces[0]);
 #endif
-      wr_result_exo(mono, monolith_file_name, 0);
+      wr_result_exo(mono, monolith_file_name, 0, 1, 1);
 
       if ( mono->num_glob_vars > 0 ) {
 

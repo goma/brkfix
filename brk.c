@@ -295,10 +295,12 @@ PROTO((Exo_DB *,		/* exo - ptr to full ripe EXODUS II fe db */
        char *,			/* filename - where to write */
        int ));			/* verbosity - 0 for quiet, more to talk */
 
-extern void wr_result_exo	/* wr_exo.c */
-PROTO((Exo_DB *,		/* exo */
-       char *,			/* filename - where to write */
-       int ));			/* verbosity - 0 for quiet, more to talk */
+void 
+wr_result_exo(Exo_DB *exo,
+	      char *filename,
+	      int verbosity,
+              int write_node_vars,
+              int write_elem_vars);
 
 extern int wr_dpi		/* wr_dpi.c */
 PROTO((Dpi *,			/* fantastic structure defd in "dpi.h" */
@@ -4616,7 +4618,7 @@ main (int argc, char *argv[], char *envp[])
 	       * Write out results.
 	       */
 	      
-	      wr_result_exo(E, E->path, 0);
+	      wr_result_exo(E, E->path, 0, 1, 0);
 	    }
 
 	  free_exo_nv(E);
@@ -4751,7 +4753,7 @@ main (int argc, char *argv[], char *envp[])
 	       * Write out results.
 	       */
 	      
-	      wr_result_exo(E, E->path, 0);
+	      wr_result_exo(E, E->path, 0, 1, 0);
 	    }
 
 	  free_exo_ev(E);
@@ -5184,7 +5186,7 @@ main (int argc, char *argv[], char *envp[])
       one_base(mono);
       wr_mesh_exo(mono, out_augplot_file_name, 0);
       wr_resetup_exo(mono, out_augplot_file_name, 0);
-      wr_result_exo(mono, out_augplot_file_name, 0);
+      wr_result_exo(mono, out_augplot_file_name, 0, 1, 1);
       zero_base(mono);
 
       free_exo_ev(mono);

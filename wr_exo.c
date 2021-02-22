@@ -82,10 +82,12 @@ PROTO((Exo_DB *,		/* exo - ptr to full ripe EXODUS II fe db */
        char *,			/* filename - where to write */
        int ));			/* verbosity - 0 for quiet, more to talk */
 
-extern void wr_result_exo	/* wr_exo.c */
-PROTO((Exo_DB *,		/* exo */
-       char *,			/* filename - where to write */
-       int ));			/* verbosity - 0 for quiet, more to talk */
+void 
+wr_result_exo(Exo_DB *exo,
+	      char *filename,
+	      int verbosity,
+              int write_node_vars,
+              int write_elem_vars);
 
 int 
 wr_mesh_exo(Exo_DB *x,		/* def'd in exo_struct.h */
@@ -519,7 +521,9 @@ wr_resetup_exo(Exo_DB *exo,
 void 
 wr_result_exo(Exo_DB *exo,
 	      char *filename,
-	      int verbosity)
+	      int verbosity,
+              int write_node_vars,
+              int write_elem_vars)
 {
   int i;
   int index;

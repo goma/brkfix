@@ -92,12 +92,12 @@ set(FIX_SOURCES
 
 add_executable(brk ${BRK_SOURCES} ${BRKFIX_INCLUDES})
 target_include_directories(brk PRIVATE ${CMAKE_SOURCE_DIR} ${BRKFIX_TPL_INCLUDES})
-target_link_libraries(brk PUBLIC ${BRKFIX_TPL_LIBRARIES})
+target_link_libraries(brk PUBLIC ${BRKFIX_TPL_LIBRARIES} m)
 target_compile_definitions(brk PUBLIC ${BRKFIX_COMPILE_DEFINITIONS})
 
 add_executable(fix ${FIX_SOURCES} ${BRKFIX_INCLUDES})
 target_include_directories(fix PRIVATE ${CMAKE_SOURCE_DIR} ${BRKFIX_TPL_INCLUDES})
-target_link_libraries(fix PUBLIC ${BRKFIX_TPL_LIBRARIES})
+target_link_libraries(fix PUBLIC ${BRKFIX_TPL_LIBRARIES} m)
 target_compile_definitions(fix PUBLIC ${BRKFIX_COMPILE_DEFINITIONS})
 
 install(TARGETS brk fix
